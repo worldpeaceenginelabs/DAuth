@@ -19,7 +19,6 @@
     "vite": "^4.0.0"
   },
   "dependencies": {
-    "crypto-js": "^4.1.1",
     "svelte-qr": "^1.0.0"
   }
 }

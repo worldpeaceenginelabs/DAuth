@@ -1,29 +1,31 @@
 <script>
-import CryptoJS from 'crypto-js';
-
-let name;
-let password;
-// $: log = `${name}${password}`;
-
-var encrypted = CryptoJS.AES.encrypt({password}, "Secret Passphrase");
-
-
+	import QR from 'svelte-qr';
+	let name = '';
+  let pass = '';
+  $: namepass = `${name}${pass}`;
 </script>
 
 <fieldset class="fieldset">
 	
 	<label>
-		<input bind:value={name} placeholder="name" />
-		Name
+	<input id="name" bind:value={name} placeholder="name" />
 	</label>
+
 	<label>
-		<input bind:value={password} placeholder="password" />
-		Password
+	<input bind:value={pass} placeholder="passphrase" />
 	</label>
-  <br>
-{#if encrypted}
-{encrypted}
-{/if}
+
+  {#if namepass}
+  <div>
+  {namepass}
+  </div>
+  {/if}
+
+	{#key `${namepass}`}
+	<div class="qr">
+		<QR text={namepass} />
+  	</div>
+	{/key}
 
 </fieldset>
 
@@ -31,4 +33,5 @@ var encrypted = CryptoJS.AES.encrypt({password}, "Secret Passphrase");
 
 <style>
 .fieldset{position: absolute; top: 1em; left:1em; background-color: white;}
+.qr{margin: 5%; width: 250;}
 </style>
