@@ -5,6 +5,8 @@
   $: namepass = `${name}${pass}`;
 </script>
 
+
+
 <fieldset class="fieldset">
 	
 	<label>
@@ -17,7 +19,7 @@
 
   {#if namepass}
   <div>
-  {namepass}
+  Generate QR from: "{namepass}"
   </div>
   {/if}
 
