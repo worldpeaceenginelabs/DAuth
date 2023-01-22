@@ -6,13 +6,21 @@ This repo is for introducing decentralized authentication. Security measures are
 # How does it work?
 
 The component combines both inputs, name and pass. The QR-code is generated from the result (namepass)<br>
-The exact same QR-code pattern is only generated again, with the right name and pass.<br>
+The exact same QR-code pattern is only generated again, with the right name and passphrase.<br>
+
+# How to use?
+
+- npm install (install dependencies)
+- npm run dev (run hot-reload dev environment)
+- npm run build (edge-ready, vanillaJS, compressed)
 
 # Sequence
-At sign-up you generate a new QR-code from your name and a passphrase.<br>
+1. At sign-up you generate a new QR-code from your name and a passphrase.<br>
 The QR-code is generated from the combination of both.<br><br>
 
-The first time you create a profile or post, this QR-code will be connected with your new profile or post<br>
+2. The QR-code is for the period of the session connected with the user events/actions.
+
+3. The first time you create a profile or post, this QR-code will be connected with your new profile or post<br>
 ```profile-creator: qrcode123 or post-creator: qrcode123``` (Pseudocode)<br><br>
 
 This way, the profile or post "knows" who you are (which gives permission for edit/delete for instance)
@@ -29,6 +37,9 @@ This way, the profile or post "knows" who you are (which gives permission for ed
 {/if}
 ```
 
+4. If the user logs out, the session gets destroyed, but not the created documents (profile, posts, messages)
+5. If the user returns, he generates the same QR-code with the right combination of name and passphrase. This gives him access to his created documents again.
+
 # Advantages
 
 - Your name and passphrase are neither locally nor online saved. Just in your head.
@@ -39,7 +50,7 @@ This way, the profile or post "knows" who you are (which gives permission for ed
 
 - by hiding the QR-code
 - salting the combined namepass
-- encrypt the salted combined namepass value (maybe not possible since encryption algos generate random hashs)
+- encrypt the salted combined namepass value
 - encrypted transfer of the QR-code (for instance Gun base64 encryption, then webcrypto AES or SEA)
 - mechanism to make sure only 1 QR-code each user
 <br>
