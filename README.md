@@ -15,10 +15,12 @@ The exact same QR-code pattern is only generated again, with the right name and 
 - npm run build (edge-ready, vanillaJS, compressed)
 
 # Sequence
-At sign-up you generate a new QR-code from your name and a passphrase.<br>
+1. At sign-up you generate a new QR-code from your name and a passphrase.<br>
 The QR-code is generated from the combination of both.<br><br>
 
-The first time you create a profile or post, this QR-code will be connected with your new profile or post<br>
+2. The QR-code is for the period of the session connected with the user events/actions.
+
+3. The first time you create a profile or post, this QR-code will be connected with your new profile or post<br>
 ```profile-creator: qrcode123 or post-creator: qrcode123``` (Pseudocode)<br><br>
 
 This way, the profile or post "knows" who you are (which gives permission for edit/delete for instance)
@@ -34,6 +36,9 @@ This way, the profile or post "knows" who you are (which gives permission for ed
 
 {/if}
 ```
+
+4. If the user logs out, the session gets destroyed, but not the created documents (profile, posts, messages)
+5. If the user returns, he generates the same QR-code with the right combination of name and passphrase. This gives him access to his created documents again.
 
 # Advantages
 
