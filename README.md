@@ -6,7 +6,7 @@ This repo is for introducing decentralized authentication. Security measures are
 # How does it work?
 
 The component combines both inputs, name and pass. The QR-code is generated from the result (namepass)<br>
-The exact same QR-code pattern is only generated again, with the right name and pass.<br>
+The exact same QR-code pattern is only generated again, with the right name and passphrase.<br>
 
 # How to use?
 
@@ -50,7 +50,7 @@ This way, the profile or post "knows" who you are (which gives permission for ed
 
 - by hiding the QR-code
 - salting the combined namepass
-- encrypt the salted combined namepass value (maybe not possible since encryption algos generate random hashs)
+- encrypt the salted combined namepass value
 - encrypted transfer of the QR-code (for instance Gun base64 encryption, then webcrypto AES or SEA)
 - mechanism to make sure only 1 QR-code each user
 <br>
