@@ -8,6 +8,12 @@ This repo is for introducing decentralized authentication. Security measures are
 The component combines both inputs, name and pass. The QR-code is generated from the result (namepass)<br>
 The exact same QR-code pattern is only generated again, with the right name and pass.<br>
 
+# How to use?
+
+- npm install (install dependencies)
+- npm run dev (run hot-reload dev environment)
+- npm run build (edge-ready, vanillaJS, compressed)
+
 # Sequence
 At sign-up you generate a new QR-code from your name and a passphrase.<br>
 The QR-code is generated from the combination of both.<br><br>
