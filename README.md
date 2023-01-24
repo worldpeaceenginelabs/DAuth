@@ -93,10 +93,11 @@ Today we use domains to make our servers, relays, signaling server, website, web
 Make them listen to that domain's "ports"<br>
 <br>
 But what if every person had a domain? Like everybody today is having a telephone-number...<br>
+What if every browser had a domain? (browser to browser calls, browser sync, browser cms, browser whatnotelse...)
 
 ### Example
 1. My domain is: myname.com
 2. myname.com connects to a Gun relay, which is a decentralized back-end, a graph database.
-3. My notebook, pc, and smartphone have an app or webapp, which connects regularly to that domain to check for new data (call, message etc.)
+3. My notebook, pc, and smartphone have an app, browser-extension, or webapp(myname.com), which connects regularly to myname.com to check for new data.
 4. If you like to talk call myname.com, or message me on myname.com, or send whatever to myname.com (my all three devices "telephone-number")
 5. This way every browser can listen to outside traffic. Ad-hoc sharing gets sweet as cake i imagine.
