@@ -16,7 +16,8 @@ The exact same QR Code pattern is only generated again, with the right name and 
 To do:
 - salt
 - hash
-- QR Code or hash match function
+- hide or show the QR code
+- QR Code and/or hash match function
 
 # How to use?
 
@@ -26,11 +27,11 @@ To do:
 
 # Sequence
 
-1. At sign-up you generate a new QR Code from your name and a passphrase.<br><br>
+1. At sign-up you generate a new QR Code(hash) from your name and a passphrase.<br><br>
 
-2. The QR Code or hash is for the period of the session connected with the user events/actions.
+2. The QR Code(hash) is for the period of the session connected with the user events/actions.
 
-3. The first time you create a profile or post, this QR Code or the hash will be connected with your new profile or post<br>
+3. The first time you create a profile or create a post, this QR Code(hash) will be connected with your new profile or post<br>
 ```profile-creator: qrcode123 or post-creator: qrcode123``` (Pseudocode)<br><br>
 
 This way, the profile or post "knows" who you are (which gives permission for edit/delete for instance)
@@ -48,7 +49,7 @@ watchmode()
 ```
 
 4. If the user logs out, the session gets destroyed, but not the created documents (profile, posts, messages)(own storage&sync-logic neccessary)
-5. If the user returns, with the right combination of name and passphrase, he generates the exact same QR Code or hash. This gives him access to his created documents again.
+5. If the user returns, with the right combination of name and passphrase, he generates the exact same QR Code(hash). This gives him access to his created documents again.
 
 # Advantages
 
@@ -63,6 +64,7 @@ watchmode()
 - salting
 - hash (SHA-3)
 - encryption (AES256)
+- encrypted transfer of the hash
 - encrypted transfer of the QR-code (base64, webcrypto, other crypto-lib, SEA)
 - mechanism to make sure only 1 QR-code each user
 <br><br>
