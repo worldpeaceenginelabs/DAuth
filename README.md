@@ -32,14 +32,14 @@ To do:
 2. The QR Code(hash) is for the period of the session connected with the user events/actions.
 
 3. The first time you create a profile or create a post, this QR Code(hash) will be connected with your new profile or post<br>
-```profile-creator: qrcode123 or post-creator: qrcode123``` (Pseudocode)<br><br>
+```profile-creator: hash123 or post-creator: hash123``` (Pseudocode)<br><br>
 
 This way, the profile or post "knows" who you are (which gives permission for edit/delete for instance)
 
 ```
 // Pseudocode
 
-{#if user = qrcode123}
+{#if user = hash123}
 editmode()
 
 {#else}
