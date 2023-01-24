@@ -60,6 +60,11 @@ watchmode()
 - encrypted transfer of the QR Code (base64, webcrypto, other crypto-lib, SEA)
 - instead of storing and or sending the QR Code you can just take the hash and generate the QR Code client-side again (also good for avatar or friend-connect for instance)
 - mechanism to make sure only 1 QR-code each user
+
+
+
+
+
 <br><br>
 
 # NPM
@@ -69,4 +74,29 @@ watchmode()
 - npm run build (edge-ready, vanillaJS, compressed)
 <br>
 
-![image](https://user-images.githubusercontent.com/67427045/213913807-464d737b-0bfb-4ece-a0d4-64cceac29671.png)
+![image](https://user-images.githubusercontent.com/67427045/213913807-464d737b-0bfb-4ece-a0d4-64cceac29671.png)<br>
+
+# This is a concept inspired by [OPEN ID](https://en.wikipedia.org/wiki/OpenID) (Work in Progress)
+
+### Short reminder of what OPEN ID is
+The end user interacts with a relying party (such as a website) that provides an option to specify an OpenID for the purposes of authentication; an end user typically has previously registered an OpenID (e.g. ```alice.openid.example.org```) with an OpenID provider (e.g. ```openid.example.org```)<br>
+<br>
+
+### What did it inspire me to do?
+The problem in decentralization that comes up often is that "browsers can't listen to ports" which is pretty much the decision of the browser industry. So we are all locked in somewhat.<br>
+<br>
+"browsers can't listen to ports" means that browsers can send data to an adress and request something. But your browser (actually the device: computer, smartphone etc.) does not have a fixed address (the address switches), so your browser can't listen to incoming requests. (can't listen to ports, because there are no ports)<br>
+<br>
+This is the reason why you need a station in the middle (server, relay, signaling server etc.) When you and your chatpartner use Whatsapp, you both are connected to https://whatsapp.com, which manages your message exchange. A connected to whatsapp.com, B connected to whatsapp.com, we have line, signal.<br>
+<br>
+Today we use domains to make our servers, relays, signaling server, website, webapp etc. available to the public.<br>
+Make them listen to that domain's "ports"<br>
+<br>
+But what if every person had a domain? Like everybody today is having a telephone-number...<br>
+
+### Example
+1. My domain is: myname.com
+2. My notebook, pc, and smartphone have an app or webapp, which connects regularly to that domain to check for new data (call, message etc.)
+3. If you like to send me a message, you can call, message, or send to myname.com (my all three devices "telephone-number")
+4. myname.com is a static page with Gun API, which is a decentralized back-end. This way myname.com becomes a quasi signaling server, but much more.
+5. This way every person, and every device is available to the public. Security/Access/Filter/Functions depends on your myname.com page.
