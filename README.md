@@ -65,7 +65,8 @@ watchmode()
 - hash (SHA-3)
 - encryption (AES256)
 - encrypted transfer of the hash
-- encrypted transfer of the QR-code (base64, webcrypto, other crypto-lib, SEA)
+- encrypted transfer of the QR Code (base64, webcrypto, other crypto-lib, SEA)
+- instead of storing and or sending the QR Code you can just take the hash and generate the QR Code client-side again (also good for avatar or friend-connect for instance)
 - mechanism to make sure only 1 QR-code each user
 <br><br>
 
