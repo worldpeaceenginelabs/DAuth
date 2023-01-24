@@ -82,7 +82,7 @@ watchmode()
 The end user interacts with a relying party (such as a website) that provides an option to specify an OpenID for the purposes of authentication; an end user typically has previously registered an OpenID (e.g. ```alice.openid.example.org```) with an OpenID provider (e.g. ```openid.example.org```)<br>
 <br>
 
-### What did it inspire me to do?
+### What did it inspire me to?
 The problem in decentralization that comes up often is that "browsers can't listen to ports" which is pretty much the decision of the browser industry. So we are all locked in somewhat.<br>
 <br>
 "browsers can't listen to ports" means that browsers can send data to an adress and request something. But your browser (actually the device: computer, smartphone etc.) does not have a fixed address (the address switches), so your browser can't listen to incoming requests. (can't listen to ports, because there are no ports)<br>
@@ -96,7 +96,7 @@ But what if every person had a domain? Like everybody today is having a telephon
 
 ### Example
 1. My domain is: myname.com
-2. My notebook, pc, and smartphone have an app or webapp, which connects regularly to that domain to check for new data (call, message etc.)
-3. If you like to send me a message, you can call, message, or send to myname.com (my all three devices "telephone-number")
-4. myname.com is a static page with Gun API, which is a decentralized back-end. This way myname.com becomes a quasi signaling server, but much more.
-5. This way every person, and every device is available to the public. Security/Access/Filter/Functions depends on your myname.com page.
+2. myname.com connects to a Gun relay, which is a decentralized back-end, a graph database.
+3. My notebook, pc, and smartphone have an app or webapp, which connects regularly to that domain to check for new data (call, message etc.)
+4. If you like to talk call myname.com, or message me on myname.com, or send whatever to myname.com (my all three devices "telephone-number")
+5. This way every browser can listen to outside traffic. Ad-hoc sharing gets sweet as cake i imagine.
