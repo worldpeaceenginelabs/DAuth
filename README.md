@@ -12,10 +12,14 @@ Only the owner of the name and the passphrase can re-create the exact same QR Co
 # How does it work?
 
 To do:
-- salt
-- hash
+- salt, hash, pepper
+- SHA-3 or Argon2 (for Argon2 i search for a client-side hashing repo thats not WASM)
 - hide or show the QR code
 - QR Code and/or hash match function
+
+# Here is a first try (Work in progress)
+![image](https://user-images.githubusercontent.com/67427045/214812508-e0c8ee14-82cb-48df-a19e-9ce333af9543.png)
+<br>
 
 ### Course of action
 1. At sign-up you generate a new QR Code(hash) from your name and a passphrase.<br><br>
