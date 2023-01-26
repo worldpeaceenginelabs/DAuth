@@ -19,6 +19,7 @@
     "vite": "^4.0.0"
   },
   "dependencies": {
+    "js-sha3": "^0.8.0",
     "svelte-qr": "^1.0.0"
   }
 }

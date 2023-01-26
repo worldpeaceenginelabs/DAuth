@@ -1,13 +1,39 @@
 <script>
 	import QR from 'svelte-qr';
+	import { keccak512 } from 'js-sha3';
+	
+	// name and pass
 	let name = '';
-  let pass = '';
-  $: namepass = `${name}${pass}`;
+  	let pass = '';
+
+	// salt name, salt pass
+	let salt1 = "v->#Mg3@mXjR$\}<WJtu[m~m<=\/88";
+	let salt2 = "Jtu[m~m<Mg3@mXjR$\}<W";
+	let salt3 = "=\/88v->#Jtu[mv->#Mg3@mXjR$\}#Mg3@mXjR$\}<W"
+
+	// combine name + salt1, combine pass + salt2
+	let saltedName = `${name}${salt1}`;
+	let saltedPass = `${pass}${salt2}`;
+
+	// hash salted name and pass
+	let hashName = keccak512(saltedName);
+	let hashPass = keccak512(saltedPass)
+	
+	// combine hashName, hashpass and salt3
+	let combination = `${hashPass}${salt3}${hashName}`;
+	
+	// hash from combination
+	let hash = keccak512(combination);
+
+	// later there is a QR Code generated from this hash. The QR Code can be reversed into the hash without encryption.
+	// Only the owner of the right credentials (name+pass)can authenticate himself to be the owner of the QR-Code.
+	// (Zero-Knowledge-Proof)
 </script>
 
 
 
-<fieldset class="fieldset">
+<!-- Markup-->
+<fieldset class="fieldset" align="center">
 	
 	<label>
 	<input id="name" bind:value={name} placeholder="name" />
@@ -17,15 +43,20 @@
 	<input bind:value={pass} placeholder="passphrase" />
 	</label>
 
-  {#if namepass}
+  {#if combination}
   <div>
-  Generate QR from: "{namepass}"
+  Generate QR from:<br>
+  		<div style:color="red">
+
+		"{combination}" <!--shows the content of let combination-->
+
+  		</div>
   </div>
   {/if}
 
-	{#key `${namepass}`}
+	{#key `${hash}`}
 	<div class="qr">
-		<QR text={namepass} />
+		<QR text={hash} /> <!--Generates a QR Code from let hash-->
   	</div>
 	{/key}
 
