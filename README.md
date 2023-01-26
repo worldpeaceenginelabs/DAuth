@@ -1,5 +1,8 @@
 # DAuth - Generate and destroy user accounts just-in-time
 
+# ATTENTION! WORK IN PROGRESS! DON'T USE FOR NOW!<br>EXPERIMENTAL - BUT MY ONLINE RESEARCH AND TALKS WITH CRYPTOGRAPHY EXPERTS IMPROVING DAuth EVERY DAY,<br>SO STAY TUNED...
+<br>
+
 ![image](https://user-images.githubusercontent.com/67427045/214201859-4318014e-9ed1-40a7-ac8a-a44269d0ec7f.png)<br>
 
 This repo introduces authentication WITHOUT A USER DATABASE or user/password storage and/or exchange.<br><br>
