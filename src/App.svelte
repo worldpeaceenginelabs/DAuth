@@ -56,7 +56,7 @@
 
 	{#key `${hash}`}
 	<div class="qr">
-		<QR text={hash} /> <!--Generates a QR Code from let hash-->
+		<QR text={hash} version={-1} /> <!--Generates a QR Code from let hash-->
   	</div>
 	{/key}
 
@@ -66,5 +66,5 @@
 
 <style>
 .fieldset{position: absolute; top: 1em; left:1em; background-color: white;}
-.qr{margin: 5%; width: 250;}
+.qr{margin: 5%;}
 </style>
