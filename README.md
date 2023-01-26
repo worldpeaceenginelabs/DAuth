@@ -63,13 +63,15 @@ watchmode()
 - encrypted transfer of the hash
 - encrypted transfer of the QR Code (base64, webcrypto, other crypto-lib, SEA)
 - instead of storing and or sending the QR Code you can just take the hash and generate the QR Code client-side again (also good for avatar or friend-connect for instance)
-- mechanism to make sure only 1 QR-code each user
+- mechanism to make sure only 1 QR-code each user<br>
+<br>
 
-
-
-
-
-<br><br>
+# MUST read/watch
+Fireship: https://youtu.be/NuyzuNBFWxQ (7 Cryptography Concepts EVERY Developer Should Know)<br>
+<br>
+Computerphile: https://youtu.be/8ZtInClXe1Q (How NOT to Store Passwords!) and https://youtu.be/b4b8ktEV4Bg (Hashing Algorithms and Security)<br>
+<br>
+https://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-website-authentication/477578#477578 (The definitive guide to form-based website authentication)
 
 # NPM
 
