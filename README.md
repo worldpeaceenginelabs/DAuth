@@ -12,8 +12,8 @@ Only the owner of the name and the passphrase can re-create the exact same QR Co
 # How does it work?
 
 To do:
-- salt
-- hash
+- salt, hash, pepper
+- SHA-3 or Argon2 (for Argon2 i search for a client-side hashing repo thats not WASM)
 - hide or show the QR code
 - QR Code and/or hash match function
 
