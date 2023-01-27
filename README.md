@@ -1,6 +1,6 @@
 # DAuth - Generate and destroy user accounts just-in-time
 
-# ATTENTION! WORK IN PROGRESS! DON'T USE FOR NOW!<br>EXPERIMENTAL - BUT MY ONLINE RESEARCH AND TALKS WITH CRYPTOGRAPHY EXPERTS IMPROVING DAuth EVERY DAY,<br>SO STAY TUNED...
+# ATTENTION! WORK IN PROGRESS!<br>DON'T USE FOR NOW!<br>EXPERIMENTAL - BUT MY ONLINE RESEARCH AND TALKS WITH CRYPTOGRAPHY EXPERTS IMPROVING DAuth EVERY DAY,<br>SO STAY TUNED...
 <br>
 
 ![image](https://user-images.githubusercontent.com/67427045/214201859-4318014e-9ed1-40a7-ac8a-a44269d0ec7f.png)<br>
@@ -87,7 +87,7 @@ https://stackoverflow.com/questions/549/the-definitive-guide-to-form-based-websi
 
 <br><br>
 
-# The following slide is the actual state that every developer will face at some point when starting with GunJS (Github, Cloudflare, ENV's, are exchangeable with your providers/methods)
+# The following slide is the actual state that every developer will face at some point when starting with GunJS (or any other decentralized database) (Github, Cloudflare, ENV's, are exchangeable with your providers/methods)
  
 ![image](https://user-images.githubusercontent.com/67427045/215068864-69e8a618-9df6-4278-acb1-56ffbfe0f579.png)
 
@@ -145,6 +145,13 @@ You can start to see some patterns coming up from playing with red,yellow and gr
 
 I will start by locking the whole system up and myself out, and then start open it a bit, look what happens, maybe unlock it a bit further... You'll get the point...
 
+# Usecase dependant relay strategy - With and without identities (signatures)<br>
+
+<br><br>
+
+![image](https://user-images.githubusercontent.com/67427045/215081055-0e32a02c-a16d-409e-b56f-0c6e6d261321.png)<br>
+
+<br><br>
 
 # EXPERIMENTAL THOUGHTS: This is a concept inspired by [OPEN ID](https://en.wikipedia.org/wiki/OpenID) (Work in Progress)
 
