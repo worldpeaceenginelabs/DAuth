@@ -61,8 +61,8 @@ watchmode()
 - by hiding the QR-code
 - https TLS! (against man in the middle attack)
 - salting
-- hash (SHA-3)
-- encryption (AES256)
+- hash
+- encryption
 - encrypted transfer of the hash
 - encrypted transfer of the QR Code (base64, webcrypto, other crypto-lib, SEA)
 - instead of storing and or sending the QR Code you can just take the hash and generate the QR Code client-side again (also good for avatar or friend-connect for instance)
@@ -110,24 +110,24 @@ I copy pasted the top slide to the bottom, made the ME card a user, and pretende
 
 Notice from the color change:
 
-WE CANT FULLY SECURE THE APP BECAUSE THE CODE IS MODIFIABLE
+**WE CANT FULLY SECURE THE APP BECAUSE THE CODE IS MODIFIABLE**
 - someone modifying your app's code seems always to be an issue, even if you basicly unplug your server.
 
-WE CANT FULLY SECURE THE RELAY EITHER, BECAUSE THE ADDRESS CAN BE KNOWN
+**WE CANT FULLY SECURE THE RELAY EITHER, BECAUSE THE ADDRESS CAN BE KNOWN**
 
 - Your app isn't even necessary, someone can just inject .put/.get on your infrastructures IPs/adresses. (Inject where? he will know from your sourcecode, the F12 console or some other tool) And be sure every peer, relay, home- cloud- or edge- server address can basically traced back by someone who really wants it. (this points us to using proxies to make it even harder to find our infrastructure!)
 
-THE FORMER POINTS US STRONGLY ON SECURING THE DATA ITSELF, THE HANDLING OF .get/.put (API)
+## THE FORMER POINTS US STRONGLY ON SECURING THE DATA ITSELF, THE HANDLING OF .get/.put (API)
 
-Measurement No 1: ENCRYPTION (for data with audience less then absolute everybody)
+#### Measurement No 1: ENCRYPTION (for data with audience less then absolute everybody)
 In case of even someone legit or someone sneaking in, they only find garbage.
 hash, padding, encryption: ECDSA-SALT-RSA or SHA-3, SHA256, AES
 
-Measurement No 2: VALIDATION/SIGNING
+#### Measurement No 2: VALIDATION/SIGNING
 Sign and validate all data with keypairs (transfer/post/message)
 hash, padding, encryption: ECDSA-SALT-RSA, or HMAC, PBKDF2
 
-Measurement No 3: RESTRICT/LIMIT/BALANCE ACCESS TO .get/.put (API)
+#### Measurement No 3: RESTRICT/LIMIT/BALANCE ACCESS TO .get/.put (API)
 - AUTH
 - Common-Sense Request Limitations:
 for instance, a couchsurf host can only offer 1 stay (send one hosting post) each day max...(common-sense)
@@ -136,7 +136,7 @@ for instance, a couchsurf host can only offer 1 stay (send one hosting post) eac
 RULE-1:"not more than one per second" (=a few short messages in a row, but not spamming the other user(s)),<br>
 but RULE-2:"not more than 15 messages in 60seconds" (limits rule 1 about 75%)"(request-rate))
 
-Measurement No 4: - AUTH
+#### Measurement No 4: - AUTH
 - creating identities: keypairs = hash, padding, encryption: ECDSA-SALT-RSA
 - Identities(created & existing) authorized, unauthorized, spammer/attacker, bot, multiple accounts, identity theft
 - who is who (identity + request-rate + block/delete)
