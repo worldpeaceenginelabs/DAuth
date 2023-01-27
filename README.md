@@ -153,6 +153,43 @@ I will start by locking the whole system up and myself out, and then start open 
 
 <br><br>
 
+# Incentivise API consumers with high bandwidth needs, and in turn grow the whole Gun Ecosystem
+  
+>  I know people want those features, but I'm trying to encourage people in the opposite direction: combine together into a large DHT so we all can reuse each other's spare bandwidth/compute. AMark
+
+I made thoughts into your direction, and if this usecase dependant relay strategies (slide under this post) were integrated into Gun, that would be awesome!
+Maybe an extension of AXE? 🔥🔥🔥
+
+### How does it work?
+After the first 24 hours of a relay relaying data to and from multiple dapps/applications from different sources, it generates a list (just for the sake of explaining, same with Google, Fortnite, Dtube) which gets updated every 24h or less.
+
+This list would look basically like this:
+
+24h USAGE:
+- hans blog: 100mb
+- peters travel blog: 500 mb
+- toms videochat: 1000mb
+- dtube: 10000mb
+- fortnite: 100000mb
+- google maps 1000000mb
+
+### From here could the AXE extension do the following:
+
+#### Group the request sources by bandwidth usage and sowith grant access to only relays to dapps/apps with similar bandwidth need.
+- So hans and peter in group A( low-level dapps)
+- tom and dtube in group B (intermediate-level dapps)
+- fortnite and google maps in group C (intensive dapps)
+
+#### Group C could be incentiviced to create more Gun relay infrastructure for the whole Gun Ecosystem (they have the money, so why not?)
+- the AXE extension limits the bandwidth of the highest consumer to the median of all consumers. Same with the second highest bandwitdth consumer and so on. Continously till a level is reached, were the group C bandwidth consumers do not slow down group A and B consumers using the same relay.
+(if efficiency < 75% => balance mediate)
+- this means for intensive consumers (group C) like Google or Fortine, that they MUST invest in the infrastructure(more relays), to raise that median. else they cant run their service, because the bandwidth will not be enough.
+- but at the same time, its an investion into the whole Gun Ecosystem. So ABC.
+
+PS: more groups A,B,C,D... for a finer grain are possible of course, this is just for the sake of explaining
+
+<br><br>
+
 # EXPERIMENTAL THOUGHTS: This is a concept inspired by [OPEN ID](https://en.wikipedia.org/wiki/OpenID) (Work in Progress)
 
 ### Short reminder of what OPEN ID is
