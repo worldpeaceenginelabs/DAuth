@@ -38,6 +38,9 @@ This is an invitiation for bs. A bot could fire a thousand account creations per
 4. And last step, you log in with your credentials from the password manager and 2FA. (as a confirmation step)
 
 This way the sign-up is a bit more of work, distracts sign-up junkies and we have proof its you again, well, the owner of your Google authenticator app... (A friend just reminded me of the fact "users can switch devices")<br>
+<br>
+
+##### I think the overall strategy will be to filter/limit access to .get/.put(API) inside the app, and sort/filter/limit/block/delete/blacklist whole apps with malicious behaviour from inside the relay.<br>This way we can keep the relays as open to everyone as possible.<br>
 
 # How does it work?
 
