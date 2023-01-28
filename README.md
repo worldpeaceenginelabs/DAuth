@@ -49,8 +49,9 @@ This way the sign-up is a bit more of work, distracts sign-up junkies and we hav
 ### Basic course of action
 1. At sign-up you generate a signed public key from your name and a passphrase.(+ salts etc.)<br><br>
 
-2. WE DON'T NEED COMPLICATED SESSION MANAGEMENT!!! Keeping the state in the tab only (if closed = session-end) and .get/.put(API) do the job!<br>
-Create/Read/Update/Delete data(graph-nodes) = .get(graph-name) / .put(graph-name)
+2. WE DON'T NEED COMPLICATED SESSION MANAGEMENT!!!<br>
+We save the successful log-in token not permanently (if browser closes = session-ends)<br>
+and .get/.put(API) will do Create/Read/Update/Delete the data [ .get(graph-name) / .put(graph-name) ]
 
 3. When you create a profile, a post, message, etc., you sign the document with your private key()<br>
 ```profile-creator: hash123 or post-creator: hash123``` (Pseudocode)<br><br>
@@ -69,13 +70,13 @@ watchmode()
 {/if}
 ```
 
-4. If the user logs out, the session gets destroyed, but not the created documents (profile, posts, messages)(own storage&sync-logic neccessary)
+4. If the user logs out or closes the browser, the session gets destroyed, but not the created documents (profile, posts, messages, etc, are synced by Gun)(own storage&sync-logic neccessary)
 
 6. If the user returns, with the right combination of name and passphrase, he generates the exact same signed public key. This gives him access to his created documents again.
 
 # Advantages
 
-- Your name and passphrase are neither locally nor online saved. Just in your head.
+- Your name and passphrase are neither locally nor online saved. Just in your head. (except we go for the 2FA solution, which is preferable)
 - No user-database necessary. The user basically generates himself on-demand, by simply logging in. And destroys himself by logging out.
 - No database requests for permissions. The moment you load the post your permissions are set.
 
