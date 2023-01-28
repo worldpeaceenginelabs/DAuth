@@ -4,21 +4,25 @@
 <br>
 
 ![image](https://user-images.githubusercontent.com/67427045/215254130-c0a6d731-7086-4451-86ed-aaa4f9048035.png)<br>
-# The idea
+<br>
+
+# The basic idea
 This repo introduces authentication WITHOUT A USER DATABASE or user/password storage and/or exchange.<br>
 (i learned later that i am basically experimenting with a mix from signatures and zero knowledge proof)<br>
 <br>
-The idea is to log into a website by showing a signed public key.<br>
-Name and passphrase get salted then hashed. The hash gets further salted, encrypted and then matched with the .get/.put request itself, so basicly authenticate with the API limiter of your app and the document ownership(example in course of action)(pseudo explaination, everything changes every day but this was the basic idea)
-<br><br>
-The QR will be generated from the public key value. Its not encrypted.<br>
+The idea is to create a user by creating a signed public key, with a deteministic algorithm which creates the same signed public key from the same credentials every time the user drops his credentials into the DAuth Login.<br>
+<br>
+Only the owner of the right name and the passphrase can re-create the exact same signature again.<br>
+So same signature = same user... But nothing to store!<br>
+
+- The credentials (name, pass, ?) get salted then hashed. The private key gets salted and encrypted.<br>
+With the private key, the user can sign and verify that he is the actual owner of that public key, without transfering or even storing his secret.
+
+- The signed public key is then matched with the .get/.put(API) request of your app itself, so basicly it authenticates with the API limiter of your app and the document ownership(example in course of action)
+
+- From the public key value an unencrypted QR Code is generated.<br>
 If the QR Code gets decrypted, the result is the public key.<br>
-<br>
 This makes it easy to share contacts or exchange a file ad-hoc.<br>
-<br>
-Only the owner of the name and the passphrase can re-create the exact same signature.<br>
-So same signature, same user...
-...but nothing to store!
 <br>
 
 # How does it work?
