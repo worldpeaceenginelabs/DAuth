@@ -4,13 +4,13 @@
 <br>
 
 ![image](https://user-images.githubusercontent.com/67427045/215254130-c0a6d731-7086-4451-86ed-aaa4f9048035.png)<br>
-
+# The idea
 This repo introduces authentication WITHOUT A USER DATABASE or user/password storage and/or exchange.<br>
 (i learned later that i am basically experimenting with a mix from signatures and zero knowledge proof)<br>
 <br>
 The idea is to log into a website by showing a signed public key.<br>
-Name and passphrase get salted, hashed, salted, encrypted and then matched with the .get/.put request itself, so basicly authenticate with the GunJS API limiter(needs to be invented yet) and the document ownership(example in course of action)<br>
-<br>
+Name and passphrase get salted then hashed. The hash gets further salted, encrypted and then matched with the .get/.put request itself, so basicly authenticate with the API limiter of your app and the document ownership(example in course of action)(pseudo explaination, everything changes every day but this was the basic idea)
+<br><br>
 The QR will be generated from the public key value. Its not encrypted.<br>
 If the QR Code gets decrypted, the result is the public key.<br>
 <br>
@@ -18,6 +18,7 @@ This makes it easy to share contacts or exchange a file ad-hoc.<br>
 <br>
 Only the owner of the name and the passphrase can re-create the exact same signature.<br>
 So same signature, same user...
+...but nothing to store!
 <br>
 
 # How does it work?
