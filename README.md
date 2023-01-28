@@ -35,7 +35,7 @@ This is an invitiation for bs. There has to be a minimum obstacle, like today we
 1. You just type in your name, your passphrase gets generated with cpu-noise randomness(30 digits alphanumeric)
 2. A prompt will tell you to safe the generated pass-phrase in a password manager (i like the "just in your head" more, but better than 12345 passwords)
 3. If done, the prompt will ask you to activate 2FA authentication, so connecting it with your authenticator app, BEFORE you get minium access to the API and / or the app.<br>(zero knowledge proof = we dont know WHO, but exactly that its THE SAME user again.)
-4. And last the, you login with your credentials from the password manager and 2FA. (as a confirmation step)
+4. And last step, you login with your credentials from the password manager and 2FA. (as a confirmation step)
 
 This way the sign-up is a bit more of work, distracts sign-up junkies and we have proof its you again, well, the owner of your Google authenticator app... (A friend just reminded me of the fact "users can switch devices")<br>
 
