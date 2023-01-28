@@ -47,11 +47,12 @@ This way the sign-up is a bit more of work, distracts sign-up junkies and we hav
 <br>
 
 ### Basic course of action
-1. At sign-up you generate a signed public key from your name and a passphrase.(+ salts)<br><br>
+1. At sign-up you generate a signed public key from your name and a passphrase.(+ salts etc.)<br><br>
 
-2. The public key is for the period of the session connected with the user events/actions.
+2. WE DON'T NEED COMPLICATED SESSION MANAGEMENT!!! Keeping the state in the tab only (if closed = session-end) and .get/.put(API) do the job!<br>
+Create/Read/Update/Delete data(graph-nodes) = .get(graph-name) / .put(graph-name)
 
-3. The first time you create a profile or create a post, this public key will be connected with your new profile or post<br>
+3. When you create a profile, a post, message, etc., you sign the document with your private key()<br>
 ```profile-creator: hash123 or post-creator: hash123``` (Pseudocode)<br><br>
 
 This way, the profile or post "knows" who you are (which gives permission for edit/delete for instance)
