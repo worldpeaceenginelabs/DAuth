@@ -10,7 +10,8 @@
 This repo introduces authentication WITHOUT A USER DATABASE or user/password storage and/or exchange.<br>
 (i learned later that i am basically experimenting with a mix from signatures and zero knowledge proof)<br>
 <br>
-The idea is to create a user by creating a signed public key, with a deteministic algorithm which creates the same signed public key from the same credentials every time the user drops his credentials into the DAuth Login.<br>
+#### The idea is to create and identify a user by creating a signed public key just-in-time.<br>
+A deterministic algorithm which creates the same signed public key from the same credentials every time the user drops his credentials into the DAuth Login.<br>
 <br>
 Only the owner of the right name and the passphrase can re-create the exact same signature again.<br>
 So same signature = same user... But nothing to store!<br>
@@ -18,12 +19,25 @@ So same signature = same user... But nothing to store!<br>
 - The credentials (name, pass, ?) get salted then hashed. The private key gets salted and encrypted.<br>
 With the private key, the user can sign and verify that he is the actual owner of that public key, without transfering or even storing his secret.
 
-- The signed public key is then matched with the .get/.put(API) request of your app itself, so basicly it authenticates with the API limiter of your app and the document ownership(example in course of action)
+- The signed public key is then matched with the .get/.put(API) request of your app itself, so basicly it authenticates with the API limiter of your app and the document ownership(example in course of action) BTW: Its an auth for the JAMstack, so no servers, no workers, no NodeJS necessary(except the relays). Everything is stored static on edge, but dynamically consuming APIs. You can also use it with your typical whatever stack, it runs just everywhere.
 
 - From the public key value an unencrypted QR Code is generated.<br>
 If the QR Code gets decrypted, the result is the public key.<br>
 This makes it easy to share contacts or exchange a file ad-hoc.<br>
 <br>
+
+#### A huge flaw of this method is that you can create a new account just by typing in a different name and password.
+This is an invitiation for bs. There has to be a minimum obstacle, like today we need one emailadress or mobile number each account for instance. (a small obstacle but it works)<br>
+<br>
+
+#### A possible solution would provide even more authentication security: A sign-up procedure + 2FA-TOTP<br>
+##### Plot for Sign up with D-Auth
+1. You just type in your name, your passphrase gets generated with cpu-noise randomness(30 digits alphanumeric)
+2. A prompt will tell you to safe the generated pass-phrase in a password manager (better than 12345 passwords)
+3. If done, the prompt will ask you to activate 2FA authentication, so connecting it with your authenticator app, BEFORE you get minium access to the API and / or the app.<br>(zero knowledge proof = we dont know WHO, but exactly that its THE SAME user again.)
+4. And last the, you login with your credentials from the password manager and 2FA. (as a confirmation step)
+
+This way the sign-up is a bit more of work, distracts sign-up junkies and we have proof its you again, well, the owner of your Google authenticator app... (A friend just reminded me of the fact "users can switch devices")<br>
 
 # How does it work?
 
@@ -31,12 +45,12 @@ This makes it easy to share contacts or exchange a file ad-hoc.<br>
 ![image](https://user-images.githubusercontent.com/67427045/214812508-e0c8ee14-82cb-48df-a19e-9ce333af9543.png)
 <br>
 
-### Course of action
-1. At sign-up you generate a new QR Code(hash) from your name and a passphrase.<br><br>
+### Basic course of action
+1. At sign-up you generate a signed public key from your name and a passphrase.(+ salts)<br><br>
 
-2. The QR Code(hash) is for the period of the session connected with the user events/actions.
+2. The public key is for the period of the session connected with the user events/actions.
 
-3. The first time you create a profile or create a post, this QR Code(hash) will be connected with your new profile or post<br>
+3. The first time you create a profile or create a post, this public key will be connected with your new profile or post<br>
 ```profile-creator: hash123 or post-creator: hash123``` (Pseudocode)<br><br>
 
 This way, the profile or post "knows" who you are (which gives permission for edit/delete for instance)
@@ -55,7 +69,7 @@ watchmode()
 
 4. If the user logs out, the session gets destroyed, but not the created documents (profile, posts, messages)(own storage&sync-logic neccessary)
 
-6. If the user returns, with the right combination of name and passphrase, he generates the exact same QR Code(hash). This gives him access to his created documents again.
+6. If the user returns, with the right combination of name and passphrase, he generates the exact same signed public key. This gives him access to his created documents again.
 
 # Advantages
 
