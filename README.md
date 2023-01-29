@@ -42,13 +42,19 @@ This way the sign-up is a bit more of work, distracts sign-up junkies and we hav
 
 # How does it work?
 
-### Here is a first try (Work in progress)
-![image](https://user-images.githubusercontent.com/67427045/214812508-e0c8ee14-82cb-48df-a19e-9ce333af9543.png)
+### Here is what i got with the help of ChatGPT so far (Work in progress)
+
+This code is a script for handling user authentication in a web application. It includes functions for creating a hash of the input string using SHA256, signing the data using RSA, and generating a public/private key pair using RSA. The login form submission handler, "handleLogin," performs the following steps when triggered:
+
+- Salts and hashes the user's credentials (username and password)
+- Generates a public/private key pair
+- Signs the public key with the hashed credentials
+- Stores the public key and signature in the browser's local storage
+- The script also includes a check to determine if the user is logged in or not based on the presence of the public key and signature in the local storage. If the user is not logged in, a login form is displayed. If the user is logged in, the main app is displayed.
 <br>
 
-### Here is a first try from ChatGPT 🤯
-![image](https://user-images.githubusercontent.com/67427045/215337642-cc59c7a4-2efa-4e15-a11e-0b35ff81b696.png)<br>
-![image](https://user-images.githubusercontent.com/67427045/215337653-1c6d676e-b124-405b-8fa4-de6dd8d0b762.png)
+![image](https://user-images.githubusercontent.com/67427045/215357522-fd7b7ea2-9cfd-4953-a080-374b07914eee.png)
+![image](https://user-images.githubusercontent.com/67427045/215357559-57e7d5d8-8d53-4efa-b68f-a57f7fe742de.png)
 <br>
 
 ### Basic course of action
