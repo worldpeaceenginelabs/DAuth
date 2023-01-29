@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "js-sha3": "^0.8.0",
+    "pako": "^2.1.0",
+    "quill": "^1.3.7",
     "svelte-qr": "^1.0.0"
   }
 }
