@@ -46,6 +46,11 @@ This way the sign-up is a bit more of work, distracts sign-up junkies and we hav
 ![image](https://user-images.githubusercontent.com/67427045/214812508-e0c8ee14-82cb-48df-a19e-9ce333af9543.png)
 <br>
 
+### Here is a first try from ChatGPT 🤯
+![image](https://user-images.githubusercontent.com/67427045/215337642-cc59c7a4-2efa-4e15-a11e-0b35ff81b696.png)<br>
+![image](https://user-images.githubusercontent.com/67427045/215337653-1c6d676e-b124-405b-8fa4-de6dd8d0b762.png)
+<br>
+
 ### Basic course of action
 1. At sign-up you generate a signed public key from your name and a passphrase.(+ salts etc.)<br><br>
 
