@@ -44,17 +44,16 @@ This way the sign-up is a bit more of work, distracts sign-up junkies and we hav
 
 ### Here is what i got with the help of ChatGPT so far (Work in progress)
 
-This code is a script for handling user authentication in a web application. It includes functions for creating a hash of the input string using SHA256, signing the data using RSA, and generating a public/private key pair using RSA. The login form submission handler, "handleLogin," performs the following steps when triggered:
+##### This app implements a basic authentication mechanism. It does the following:
 
-- Salts and hashes the user's credentials (username and password)
-- Generates a public/private key pair
-- Signs the public key with the hashed credentials
-- Stores the public key and signature in the browser's local storage
-- The script also includes a check to determine if the user is logged in or not based on the presence of the public key and signature in the local storage. If the user is not logged in, a login form is displayed. If the user is logged in, the main app is displayed.
+1. Hash the password entered by the user along with a random salt value.
+2. Generate a public and private key pair for the user using the Elliptic Curve Digital Signature Algorithm (ECDSA).
+3. Sign the public key with the private key.
+4. Store the username, public key, and signature in the local storage.
+5. When the user logs in, the app first checks if the public key is signed by its rightful owner by verifying the signature. Then it compares the hashed password entered by the user with the stored value to authenticate the user.<br> 
 <br>
 
-![image](https://user-images.githubusercontent.com/67427045/215357522-fd7b7ea2-9cfd-4953-a080-374b07914eee.png)
-![image](https://user-images.githubusercontent.com/67427045/215357559-57e7d5d8-8d53-4efa-b68f-a57f7fe742de.png)
+![image](https://user-images.githubusercontent.com/67427045/215518770-d93fce04-0bcd-441d-bd65-79fa61b79176.png)<br>
 <br>
 
 ### Basic course of action
