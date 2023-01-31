@@ -1,80 +1,124 @@
 <script>
-  let user = {};
-  let storageLimit = 1048576; // 1 MB in bytes
-  const hashAlgorithm = 'SHA-256';
-  const curve = 'P-256';
-  const signingAlgorithm = {
-    name: 'ECDSA',
-    hash: { name: hashAlgorithm },
+  import { bind } from "svelte/internal";
+
+  let publicKey, privateKey, signature, verified, publicKeyForm, privateKeyForm;
+ 
+  // Generate key pair 
+
+  async function handleGenerate() {
+    
+    var ecdsaKeyPair = await window.crypto.subtle.generateKey(
+      {
+        name: "ECDSA",
+        namedCurve: "P-256",
+      },
+      true,
+      ["sign", "verify"]
+    );
+    publicKey = await window.crypto.subtle.exportKey("jwk", ecdsaKeyPair.publicKey);
+    privateKey = await window.crypto.subtle.exportKey("jwk", ecdsaKeyPair.privateKey);
+
+    // sign public key with private key
+
+    signature = await window.crypto.subtle.sign(
+      {
+        name: "ECDSA",
+        hash: {name: "SHA-256"},
+      },
+      ecdsaKeyPair.privateKey,
+      new TextEncoder().encode(JSON.stringify(publicKey))
+    );
+    
+    // verify the authenticity of the public key
+    verified = await window.crypto.subtle.verify(
+      {
+        name: "ECDSA",
+        hash: {name: "SHA-256"},
+      },
+      ecdsaKeyPair.publicKey,
+      signature,
+      new TextEncoder().encode(JSON.stringify(publicKey))
+    );
+
+    if (verified) {
+      console.log("The public key is authentic.");
+    } else {
+      console.log("The public key is not authentic.");
+    }
+  }
+
+
+
+  async function handleLogin(event) {
+    event.preventDefault();
+
+    publicKey = await window.crypto.subtle.importKey("jwk", publicKeyForm, {
+    name: "ECDSA",
+    namedCurve: "P-256"
+  }, true, ["verify"]);
+  
+  privateKey = await window.crypto.subtle.importKey("jwk", privateKeyForm, {
+    name: "ECDSA",
+    namedCurve: "P-256"
+  }, true, ["sign"]);
+
+    
+    // sign public key with private key
+
+    signature = await window.crypto.subtle.sign(
+      {
+        name: "ECDSA",
+        hash: {name: "SHA-256"},
+      },
+      privateKey,
+      new TextEncoder().encode(JSON.stringify(publicKey))
+    );
+    
+    // verify the authenticity of the public key
+    verified = await window.crypto.subtle.verify(
+      {
+        name: "ECDSA",
+        hash: {name: "SHA-256"},
+      },
+      publicKey,
+      signature,
+      new TextEncoder().encode(JSON.stringify(publicKey))
+    );
+
+    if (verified) {
+      console.log("The public key is authentic.");
+    } else {
+      console.log("The public key is not authentic.");
+    }
   };
 
-  async function hashPassword(password, salt) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password + salt);
-    const hash = await window.crypto.subtle.digest(hashAlgorithm, data);
-    return Array.from(new Uint8Array(hash))
-      .map(b => b.toString(16).padStart(2, '0'))
-      .join('');
-  }
-
-  async function createKeyPair() {
-    const keyPair = await window.crypto.subtle.generateKey(
-      { name: 'ECDSA', namedCurve: curve },
-      true,
-      ['sign', 'verify']
-    );
-    const publicKey = await window.crypto.subtle.exportKey('raw', keyPair.publicKey);
-    const privateKey = await window.crypto.subtle.exportKey('jwk', keyPair.privateKey);
-    return { publicKey, privateKey };
-  }
-
-  async function signPublicKey(privateKey, publicKey) {
-    const signature = await window.crypto.subtle.sign(
-      signingAlgorithm,
-      privateKey,
-      publicKey
-    );
-    return Array.from(new Uint8Array(signature))
-      .map(b => b.toString(16).padStart(2, '0'))
-      .join('');
-  }
-
-  async function storeKeys(user, publicKey, signature) {
-    let storageSize = JSON.stringify(localStorage).length;
-    if (storageSize + JSON.stringify({ user, publicKey, signature }).length > storageLimit) {
-      console.log('Local storage size limit reached');
-      return;
-    }
-    localStorage.setItem(user, JSON.stringify({ publicKey, signature }));
-    console.log('Stored keys:', localStorage);
-  }
-
-  function handleSubmit(e) {
-    user = { ...e.target.elements };
-    let salt = 'random_salt';
-    hashPassword(user.password, salt).then(hashedPassword => {
-      user.password = hashedPassword;
-      createKeyPair().then(({ publicKey, privateKey }) => {
-        signPublicKey(privateKey, publicKey).then(signature => {
-          storeKeys(user.username, publicKey, signature);
-        });
-      });
-    });
-  }
-
-  function emptyTemplate() {
-    localStorage.clear();
-  }
 </script>
 
-{#if Object.keys(user).length}
-  <p>Welcome to the main app!</p>
-{:else}
-  <form on:submit|preventDefault={handleSubmit}>
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="Password">
-    <button type="submit">Login</button>
-  </form>
-{/if}
 
-<style></style>
+<!--Start Screen-->
+<fieldset>
+<div>
+  <h1>Start Screen</h1>
+  <button on:click={handleGenerate}>Sign Up</button>
+</div>
+</fieldset>
+
+<!--Login Screen-->
+<fieldset>
+  <div>
+    <form>
+    <h1>Login Screen</h1>
+    <input bind:value={publicKeyForm} name="public-key">
+    <input bind:value={privateKeyForm} name="private-key">
+    <button on:submit={handleLogin}>Login</button>
+  </form>
+  </div>
+  </fieldset>
+
+<!--Welcome Screen-->
+<fieldset>
+    <div>
+    <h1>Welcome Screen</h1>
+    <p>Your public-key: {JSON.stringify(publicKey)} <br> Your private-key: {JSON.stringify(privateKey)}</p>
+  </div>
+</fieldset>
