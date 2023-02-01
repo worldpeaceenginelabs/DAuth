@@ -1,124 +1,52 @@
 <script>
-  import { bind } from "svelte/internal";
-
-  let publicKey, privateKey, signature, verified, publicKeyForm, privateKeyForm;
- 
-  // Generate key pair 
-
-  async function handleGenerate() {
-    
-    var ecdsaKeyPair = await window.crypto.subtle.generateKey(
-      {
-        name: "ECDSA",
-        namedCurve: "P-256",
-      },
-      true,
-      ["sign", "verify"]
-    );
-    publicKey = await window.crypto.subtle.exportKey("jwk", ecdsaKeyPair.publicKey);
-    privateKey = await window.crypto.subtle.exportKey("jwk", ecdsaKeyPair.privateKey);
-
-    // sign public key with private key
-
-    signature = await window.crypto.subtle.sign(
-      {
-        name: "ECDSA",
-        hash: {name: "SHA-256"},
-      },
-      ecdsaKeyPair.privateKey,
-      new TextEncoder().encode(JSON.stringify(publicKey))
-    );
-    
-    // verify the authenticity of the public key
-    verified = await window.crypto.subtle.verify(
-      {
-        name: "ECDSA",
-        hash: {name: "SHA-256"},
-      },
-      ecdsaKeyPair.publicKey,
-      signature,
-      new TextEncoder().encode(JSON.stringify(publicKey))
-    );
-
-    if (verified) {
-      console.log("The public key is authentic.");
-    } else {
-      console.log("The public key is not authentic.");
+  import Gun from "gun/gun";
+  import SEA from "gun/sea";
+  
+  let gun = Gun({
+    SEA: SEA
+  });
+  let user = gun.user();
+  let username = "";
+  let password = "";
+  let error = "";
+  
+  async function signup() {
+    try {
+      let sea = gun.get("users").get(username);
+      let encrypted = await SEA.encrypt(password, SEA.pair());
+      await user.create(username, encrypted);
+      await user.auth(username, encrypted);
+      error = "";
+    } catch (e) {
+      error = e.message;
     }
   }
-
-
-
-  async function handleLogin(event) {
-    event.preventDefault();
-
-    publicKey = await window.crypto.subtle.importKey("jwk", publicKeyForm, {
-    name: "ECDSA",
-    namedCurve: "P-256"
-  }, true, ["verify"]);
   
-  privateKey = await window.crypto.subtle.importKey("jwk", privateKeyForm, {
-    name: "ECDSA",
-    namedCurve: "P-256"
-  }, true, ["sign"]);
-
-    
-    // sign public key with private key
-
-    signature = await window.crypto.subtle.sign(
-      {
-        name: "ECDSA",
-        hash: {name: "SHA-256"},
-      },
-      privateKey,
-      new TextEncoder().encode(JSON.stringify(publicKey))
-    );
-    
-    // verify the authenticity of the public key
-    verified = await window.crypto.subtle.verify(
-      {
-        name: "ECDSA",
-        hash: {name: "SHA-256"},
-      },
-      publicKey,
-      signature,
-      new TextEncoder().encode(JSON.stringify(publicKey))
-    );
-
-    if (verified) {
-      console.log("The public key is authentic.");
-    } else {
-      console.log("The public key is not authentic.");
+  async function login() {
+    try {
+      let sea = gun.get("users").get(username);
+      let encrypted = await SEA.encrypt(password, SEA.pair());
+      await user.auth(username, encrypted);
+      error = "";
+    } catch (e) {
+      error = e.message;
     }
-  };
-
+  }
+  
+  function logout() {
+    user.leave();
+  }
 </script>
+{#if user.is && user.alias}
 
-
-<!--Start Screen-->
-<fieldset>
-<div>
-  <h1>Start Screen</h1>
-  <button on:click={handleGenerate}>Sign Up</button>
-</div>
-</fieldset>
-
-<!--Login Screen-->
-<fieldset>
-  <div>
-    <form>
-    <h1>Login Screen</h1>
-    <input bind:value={publicKeyForm} name="public-key">
-    <input bind:value={privateKeyForm} name="private-key">
-    <button on:submit={handleLogin}>Login</button>
-  </form>
-  </div>
-  </fieldset>
-
-<!--Welcome Screen-->
-<fieldset>
-    <div>
-    <h1>Welcome Screen</h1>
-    <p>Your public-key: {JSON.stringify(publicKey)} <br> Your private-key: {JSON.stringify(privateKey)}</p>
-  </div>
-</fieldset>
+  <p>Welcome, {user.alias}</p>
+  <button on:click={logout}>Logout</button>
+{:else}
+  <input type="text" bind:value={username} placeholder="Username" />
+  <input type="password" bind:value={password} placeholder="Password" />
+  <button on:click={signup}>Sign up</button>
+  <button on:click={login}>Login</button>
+  {#if error}
+    <p style="color: red">{error}</p>
+  {/if}
+{/if}
