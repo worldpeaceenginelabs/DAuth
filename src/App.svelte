@@ -1,52 +1,57 @@
 <script>
-  import Gun from "gun/gun";
-  import SEA from "gun/sea";
-  
-  let gun = Gun({
-    SEA: SEA
+  import GUN from 'gun';
+  import 'gun/sea';
+  import 'gun/axe';
+
+  // Database
+  const db = GUN();
+
+  // Gun User
+  const user = db.user().recall({sessionStorage: true});
+
+  // Current User's username
+  let username;
+
+  // Current User's password
+  let password;
+
+  // Get Alias
+  db.on('auth', async(event) => {
+    const alias = await user.get('alias'); // username string
+    username = alias;
+
+    console.log(`signed in as ${alias}`);
   });
-  let user = gun.user();
-  let username = "";
-  let password = "";
-  let error = "";
-  
-  async function signup() {
-    try {
-      let sea = gun.get("users").get(username);
-      let encrypted = await SEA.encrypt(password, SEA.pair());
-      await user.create(username, encrypted);
-      await user.auth(username, encrypted);
-      error = "";
-    } catch (e) {
-      error = e.message;
-    }
+
+  // Login button
+  function login() {
+    user.auth(username, password, ({ err }) => err && alert(err));
   }
-  
-  async function login() {
-    try {
-      let sea = gun.get("users").get(username);
-      let encrypted = await SEA.encrypt(password, SEA.pair());
-      await user.auth(username, encrypted);
-      error = "";
-    } catch (e) {
-      error = e.message;
-    }
+
+  // Sign-up button
+  function signup() {
+    user.create(username, password, ({ err }) => {
+      if (err) {
+        alert(err);
+      } else {
+        login();
+      }
+    });
   }
-  
+
+  // Logout button
   function logout() {
-    user.leave();
+    user.leave(console.log("user logged out"));
   }
 </script>
-{#if user.is && user.alias}
 
-  <p>Welcome, {user.alias}</p>
-  <button on:click={logout}>Logout</button>
-{:else}
-  <input type="text" bind:value={username} placeholder="Username" />
-  <input type="password" bind:value={password} placeholder="Password" />
-  <button on:click={signup}>Sign up</button>
-  <button on:click={login}>Login</button>
-  {#if error}
-    <p style="color: red">{error}</p>
-  {/if}
-{/if}
+<!-- HTML (Markup) -->
+<label for="username">Username</label>
+<input class="user-input" name="username" bind:value={username} minlength="3" maxlength="16" />
+
+<label for="password">Password</label>
+<input class="user-input" name="password" bind:value={password} type="password" minlength="8" /> <!-- force aA123!? for better pass strength??? -->
+
+<button class="login" on:click={login}>Login</button>
+<button class="login"  on:click={signup}>Sign Up</button>
+<button class="login"  on:click={logout}>Logout</button>
