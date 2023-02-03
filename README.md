@@ -1,7 +1,13 @@
 # DAuth - Generate and destroy user accounts just-in-time
 
-# ATTENTION! WORK IN PROGRESS!<br>DON'T USE FOR NOW!<br>EXPERIMENTAL - BUT MY ONLINE RESEARCH AND TALKS WITH CRYPTOGRAPHY EXPERTS IMPROVING DAuth EVERY DAY,<br>SO STAY TUNED...
-<br>
+# WORK IN PROGRESS!
+### (Working)Ready to go sign-up, login, logout for the decentralized database GunJS. (../src/App.svelte)
+### I will continue on https://github.com/worldpeaceenginelabs/GunJS-AUTH-SIGN-UP-LOGIN-LOGOUT by adding 2FA authentification.
+### GUNJS 5 min Quickstart + AI coding partner https://github.com/worldpeaceenginelabs/GUNJS-STARTERKIT-QUICKSTART-ARTIFICIAL-INTELLIGENCE-PAIR-CODING
+
+<br><br><br><br> 
+
+# This idea isn't dead. But I will go for the above GunJS Login first, and hope i learn something on the way for DAuth...
 
 ![image](https://user-images.githubusercontent.com/67427045/215254130-c0a6d731-7086-4451-86ed-aaa4f9048035.png)<br>
 <br>
@@ -41,20 +47,6 @@ This way the sign-up is a bit more of work, distracts sign-up junkies and we hav
 <br>
 
 # How does it work?
-
-### Here is what i got with the help of ChatGPT so far (Work in progress)
-
-##### This app implements a basic authentication mechanism. It does the following:
-
-1. Hash the password entered by the user along with a random salt value.
-2. Generate a public and private key pair for the user using the Elliptic Curve Digital Signature Algorithm (ECDSA).
-3. Sign the public key with the private key.
-4. Store the username, public key, and signature in the local storage.
-5. When the user logs in, the app first checks if the public key is signed by its rightful owner by verifying the signature. Then it compares the hashed password entered by the user with the stored value to authenticate the user.<br> 
-<br>
-
-![image](https://user-images.githubusercontent.com/67427045/215518770-d93fce04-0bcd-441d-bd65-79fa61b79176.png)<br>
-<br>
 
 ### Basic course of action
 1. At sign-up you generate a signed public key from your name and a passphrase.(+ salts etc.)<br><br>
